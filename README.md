@@ -32,7 +32,7 @@ Here, we emploied the work of Gonzalo Benegas, et al. The model, GPN (Genomic Pr
 
 > Gonzalo Benegas, Sanjit Singh Batra, Yun S. Song bioRxiv 2022.08.22.504706; doi: https://doi.org/10.1101/2022.08.22.504706
 
-# pH embedding
+## pH embedding
 
 In the experiments, we only have two pH conditions, pH = 6 / 8. We use a one-hot-like style to encode this. To align with the DNA embedding, we assign the vector `[0, 0, ..., 0]` to pH = 6, and the vector `[1, 1, ..., 1]` to pH = 8. Each vector has the shape `[1, 512]`.
 
