@@ -26,7 +26,7 @@ We split it based on the ratio `training data : validation data = 8 : 2` to the 
 
 We consider the DNA sequence as a language system, i.e. a sequence is a sentence under our envision. As a sequential data, the short and long range correlation of the DNA sequence may affect the property of the materials. For instance, some particular pattern in seq will form sepecific secondary sturcutre domain in DNA, thus leads to different results of experiments. 
 
-To capture the motif of sequences of DNA, we intend to employ advance models, like CNN models. However, our data size (especially the labelled data) is limited by the throughout of the experiments. Thus, we formulate our situation as "few labelled target data" which was introduced in the course. A simple way to bypass the problem is to use a pre-trained model, which has leaned the DNA motif from tons of unlabelled data. 
+To capture the motif of sequences of DNA, we intended to employ advance models, like CNN models. However, our data size (especially the labelled data) is limited by the throughout of the experiments. Thus, we formulate our situation as "few labelled target data" which was introduced in the course. A simple way to bypass the problem is to use a pre-trained model, which has leaned the DNA motif from tons of unlabelled data. 
 
 Here, we emploied the work of Gonzalo Benegas, et al. The model, GPN (Genomic Pre-trained Network), was trained on the non-coding DNA dataset unsupervisedly. A DNA embedding matrix for DNA sequences will be produced by this model finally, and this embedding will be the input of our model, which has the shape `[seq, 512]`
 
@@ -34,11 +34,11 @@ Here, we emploied the work of Gonzalo Benegas, et al. The model, GPN (Genomic Pr
 
 ## pH embedding
 
-In the experiments, we only have two pH conditions, pH = 6 / 8. We use a one-hot-like style to encode this. To align with the DNA embedding, we assign the vector `[0, 0, ..., 0]` to pH = 6, and the vector `[1, 1, ..., 1]` to pH = 8. Each vector has the shape `[1, 512]`.
+In the experiments, we only had two pH conditions, pH = 6 / 8. We used a one-hot-like style to encode this. To align with the DNA embedding, we assigned the vector `[0, 0, ..., 0]` to pH = 6, and the vector `[1, 1, ..., 1]` to pH = 8. Each vector has the shape `[1, 512]`.
 
 ## Response & Outputs
 The outputs of our model are 8-dim vectors (2 responses * 4 analytes).
-Different responses have different distributions. To eliminate the effect of imbalanced distribution, we normolized the first response by a scaling factor of 0.0113.
+Different responses have different distributions. To eliminate the effect of the imbalanced distribution, we normolized the first response by a scaling factor of 0.0113.
 
 # Model
 
@@ -50,7 +50,7 @@ We concatenate the two features, DNA embedding and pH embedding, as a whole.
 
 ## Padding Seq
 
-From the experiments, DNA owns different lengths. To align different long DNA, we padding all DNA seq to the longest one in them. The max number of length is 39, then all DNA embeddings will be padded with zero-matrix so that the final shape is `[39, 512]`.
+From the experiments, DNA owns different lengths. To align different long DNA, we padded all DNA seq to the longest one in them. The max number of length is 39, then all DNA embeddings will be padded with zero-matrix so that the final shape is `[39, 512]`.
 
 With the embedding of pH, the shape of the inputs is `[40, 512]`
 
@@ -64,7 +64,7 @@ the number of parameters is `520 + 8 + 41 + 1 = 570`. which is less than the num
 
 ## Loss function
 
-For a regression model, we use MSELoss as our loss fucntion, which has the formula:
+For a regression model, we used MSELoss as our loss fucntion, which has the formula:
 $$
 L = \frac{1}{n}\sum^n_1{(y-\hat{y})^2}
 $$
