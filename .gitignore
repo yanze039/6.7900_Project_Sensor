@@ -3,3 +3,4 @@ __pycache__
 data/dna_embedding
 pics
 .DS_Store
+test.py
