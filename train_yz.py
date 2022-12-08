@@ -125,8 +125,6 @@ if __name__ == "__main__":
     LEARNING_RATE = 1e-4
 
     err_LASSO, acc_LASSO, train_loss_parallel, validation_loss_parallel, accuracy_NN = main()
-    print(err_LASSO.shape)
-    print(train_loss_parallel.shape)
 
     name_list = ["err_LASSO", "acc_LASSO", "train_loss_parallel", "validation_loss_parallel", "accuracy_NN"]
     var_list = [err_LASSO, acc_LASSO, train_loss_parallel, validation_loss_parallel, accuracy_NN]
