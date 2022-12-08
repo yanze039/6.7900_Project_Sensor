@@ -27,8 +27,8 @@ def llasso(training_dataset, validation_dataset, alpha=0.1):
     validation_X, validation_Y = validation_X.numpy(), validation_Y.numpy()
     lasso_predict = lasso.predict(validation_X.reshape(-1, flatten_feature_dim))
     error = (np.mean((lasso_predict - validation_Y) ** 2))
-    accuracy = (np.mean(((lasso_predict - validation_Y)/validation_Y) ** 2)) ** 0.5
-    return error, accuracy
+    rel_err = (np.mean(((lasso_predict - validation_Y)/validation_Y) ** 2)) ** 0.5
+    return error, rel_err
 
 
 def validation(your_model, dataset):
@@ -119,9 +119,9 @@ def main():
 if __name__ == "__main__":
     NUM_PARALLEL = 2
     OUT_FEQ = 50
-    EPOCHES = 40
+    EPOCHES = 15
     ALPHA = 0.1
-    DROPOUT_RATE = 0.1
+    DROPOUT_RATE = 0.3
     LEARNING_RATE = 1e-4
 
     err_LASSO, acc_LASSO, train_loss_parallel, validation_loss_parallel, accuracy_NN = main()
@@ -146,4 +146,14 @@ if __name__ == "__main__":
     plt.axhline(y=np.mean(err_LASSO), color='g', linestyle='-', label = "LASSO_baseline")
     plt.legend()
     plt.savefig("loss_curve.png")
+
+    plt.figure()
+    plt.yscale("log")
+    plt.plot(X, np.mean(accuracy_NN, axis=0), label="relative error of NN")
+    plt.title("Relative Error")
+    plt.xlabel("steps")
+    plt.ylabel("rel_err")
+    plt.axhline(y=np.mean(acc_LASSO), color='g', linestyle='-', label = "LASSO_baseline")
+    plt.legend()
+    plt.savefig("rel_err.png")
 
