@@ -1,6 +1,12 @@
 *.pdf
 __pycache__
 data/dna_embedding
+data/dna_onehot
+data
+data*
 pics
 .DS_Store
 test.py
+*.png
+result
+*.json

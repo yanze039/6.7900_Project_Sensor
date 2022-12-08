@@ -46,6 +46,40 @@ class DNASensorDataset(Dataset):
         return torch.from_numpy(X).float(), torch.from_numpy(Y).float(), torch.from_numpy(mask).float()
 
 
+def shuffle_data(
+        data_json="data/normalized_data.json", 
+        validation_rate=0.2,
+        validation_out="data/validation_data.json",
+        training_out="data/training_data.json"
+    ):
+
+    with open(data_json, "r") as fp:
+        data = json.load(fp)
+
+    all_keys = list(data.keys())
+    n_data = len(all_keys)
+
+    # 8:2 ratio is used.
+    val_num = int(validation_rate * n_data)
+
+    validation_idx = sorted(np.random.choice(n_data, val_num, replace=False))
+    validation_keys = [all_keys[kk] for kk in validation_idx]
+    training_keys = [kk for kk in all_keys if kk not in validation_keys]
+
+    validation_data = {}
+    for v_k in validation_keys:
+        validation_data.update({v_k: data[v_k]})
+
+    with open(validation_out, 'w') as vd:
+        json.dump(validation_data, vd, indent=4)
+
+    training_data = {}
+    for t_k in training_keys:
+        training_data.update({t_k: data[t_k]})
+
+    with open(training_out, 'w') as td:
+        json.dump(training_data, td, indent=4)
+    
 
 class MLPmodel(nn.Module):
 
@@ -58,6 +92,14 @@ class MLPmodel(nn.Module):
         self.activation = torch.nn.ReLU()
         self.linear2 = torch.nn.Linear(n_feature, 1)
         self.dropout = nn.Dropout(dropout_rate)
+        self.apply(self._init_weights)
+
+    def _init_weights(self, module):
+        if isinstance(module, nn.Linear):
+            module.weight.data.normal_(mean=0.0, std= 2.0 / (self.n_feature*self.n_embedding))
+            if module.bias is not None:
+                module.bias.data.zero_()
+
     
     def forward(self, x, mask):
         x = self.linear1(x)  # [*, 40, 8]

@@ -130,12 +130,9 @@ if __name__ == "__main__":
     Y_lasso = []
     for i, data in enumerate(train_dataloader, 0):
         inputs, labels, mask = data
-
         X_lasso.append(inputs.numpy().flatten())
         Y_lasso.append(labels.numpy().flatten())
-
     lasso.fit(X_lasso, Y_lasso)
-
     for i, data in enumerate(validation_dataloader, 0):
         inputs, labels, mask = data
         lasso_predict = lasso.predict(np.transpose(inputs.reshape(160, -1)))
