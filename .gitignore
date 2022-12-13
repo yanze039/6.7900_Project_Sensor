@@ -4,6 +4,7 @@ data/dna_embedding
 data/dna_onehot
 data
 data*
+!data.csv
 pics
 .DS_Store
 test.py

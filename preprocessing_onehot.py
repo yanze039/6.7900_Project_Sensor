@@ -14,7 +14,7 @@ import json
 Generate onehot embedding of DNAs.
 """
 
-df = pd.read_csv("intermediate_07-Aug-2020.csv")
+df = pd.read_csv("data.csv")
 n_rows = df.shape[0]
 
 dna_mapping = {}

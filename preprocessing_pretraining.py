@@ -19,7 +19,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModel.from_pretrained(model_path)
 model.eval()
 
-df = pd.read_csv("intermediate_07-Aug-2020.csv")
+df = pd.read_csv("data.csv")
 n_rows = df.shape[0]
 
 dna_mapping = {}
@@ -28,7 +28,7 @@ json_data = {}
 if not os.path.exists("data/dna_embedding"):
     os.makedirs("data/dna_embedding")
 
-print("Generating embeddings.")
+print("\nGenerating embeddings.\n")
 for rr in range(n_rows):
     data = {}
     sub = df.iloc[rr]
