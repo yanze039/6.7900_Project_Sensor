@@ -3,6 +3,8 @@
 Here we are trying to training a regression model to predict the response of the DNA-Nanotube to specific analytes.
 The data contains the sequence of DNA and pH of the solution.
 
+Please see more in our article.
+
 # Motication
 
 Biosensors usually employ biomolecules such as enzymes, antibodies or nucleic acids to detect disease biomarkers. Nanotechnology has enabled the fabrication of novel biosensors with synthetic molecular recognition elements. More specifically, the use of DNA-wrapped SWNTs (single walled carbon nanotube) has been used for the detection of a wide range of analytes in biological media. Distinct changes in fluorescent intensity values from each DNA-SWNT combination were observed when the sensor successfully recognized the analyte of interest. 

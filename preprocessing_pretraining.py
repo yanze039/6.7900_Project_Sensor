@@ -28,8 +28,8 @@ json_data = {}
 if not os.path.exists("data/dna_embedding"):
     os.makedirs("data/dna_embedding")
 
+print("Generating embeddings.")
 for rr in range(n_rows):
-    print(rr)
     data = {}
     sub = df.iloc[rr]
     seq = sub['DNA']
@@ -46,7 +46,7 @@ for rr in range(n_rows):
     data["shape_term1"] = float(sub["shape_term1"])
     data["shape_term2"] = float(sub["shape_term2"])
     json_data[f"{dna_mapping[seq]}_{sub['pH']}_{sub['Analyte']}"] = data
-
+print("embeddings are generated.")
 
 rdata = json_data
 
@@ -85,7 +85,7 @@ for condi, item in ndata.items():
         response1.append(item["analyte"][analyte]["shape_term1"])
         response2.append(item["analyte"][analyte]["shape_term2"])
 
-print(f"for wavelength shift, mean: {np.mean(response1)}, std: {np.std(response1)}")
-print(f"for intensity change, mean: {np.mean(response2)}, std: {np.std(response2)}")
+print(f"for response 1, mean: {np.mean(response1)}, std: {np.std(response1)}")
+print(f"for response 2, mean: {np.mean(response2)}, std: {np.std(response2)}")
 
 
