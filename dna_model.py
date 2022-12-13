@@ -1,7 +1,6 @@
 import torch
 from torch.utils.data import Dataset
 import torch.nn as nn
-import torch.nn.functional as F
 import numpy as np
 import json
 import os
@@ -100,7 +99,6 @@ class MLPmodel(nn.Module):
             if module.bias is not None:
                 module.bias.data.zero_()
 
-    
     def forward(self, x, mask):
         x = self.linear1(x)  # [*, 40, 8]
         x = self.dropout(x)

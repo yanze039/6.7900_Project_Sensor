@@ -1,8 +1,7 @@
 import gpn.mlm
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
 import torch
-from transformers import AutoModel, AutoModelForMaskedLM, AutoTokenizer
+from transformers import AutoModel, AutoTokenizer
 import numpy as np
 import os
 import json
